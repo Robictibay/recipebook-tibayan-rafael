@@ -1,11 +1,15 @@
-<h1>Recipe Book</h1>
+{% extends "base.html" %}
 
-<ul>
-  {% for recipe in recipes %}
-    <li>
-      <a href="{% url 'recipe-detail' recipe.pk %}">{{ recipe.name }}</a>
-    </li>
-  {% empty %}
-    <li>No recipes yet.</li>
-  {% endfor %}
-</ul>
+{% block page_heading %}Recipe List{% endblock %}
+
+{% block content %}
+    <ul>
+      {% for recipe in recipes %}
+        <li>
+          <a href="{% url 'recipe-detail' recipe.pk %}">{{ recipe.name }}</a>
+        </li>
+      {% empty %}
+        <li>No recipes yet.</li>
+      {% endfor %}
+    </ul>
+{% endblock %}
