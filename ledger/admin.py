@@ -1,15 +1,17 @@
 from django.contrib import admin
-# Import Profile here
-from .models import Recipe, Ingredient, RecipeIngredient, Profile 
+from .models import Recipe, Ingredient, RecipeIngredient, Profile, RecipeImage 
 
 class RecipeIngredientInline(admin.TabularInline):
     model = RecipeIngredient
     extra = 1
 
+class RecipeImageInline(admin.TabularInline):
+    model = RecipeImage
+    extra = 1
+
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
-    inlines = [RecipeIngredientInline]
+    inlines = [RecipeIngredientInline, RecipeImageInline]
 
 admin.site.register(Ingredient)
-# Register Profile so it shows up in the admin dashboard
 admin.site.register(Profile)
