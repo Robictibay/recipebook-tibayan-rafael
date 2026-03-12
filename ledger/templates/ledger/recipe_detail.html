@@ -7,6 +7,21 @@
     
     <p><strong>Author:</strong> {{ recipe.author.name }}</p> 
 
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'recipe-image-create' recipe.pk %}">📷 Upload an Image for this Recipe</a></p>
+    {% endif %}
+
+    <div class="recipe-images" style="display: flex; gap: 10px; margin-bottom: 20px;">
+        {% for img in recipe.images.all %}
+            <div class="recipe-image-card">
+                <img src="{{ img.image.url }}" alt="{{ img.description }}" style="max-height: 200px; border-radius: 8px;">
+                <p><em>{{ img.description }}</em></p>
+            </div>
+        {% empty %}
+            <p>No images uploaded for this recipe yet.</p>
+        {% endfor %}
+    </div>
+
     <h4>Ingredients</h4>
     <ul>
       {% for ri in recipe.ingredients.all %}
